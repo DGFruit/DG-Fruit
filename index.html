@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="web.css">
+    <link rel="stylesheet" href="settings_overlay.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        /* Glassmorphism for Home's primary Nav Bar strictly on the top menu */
+        .menustage {
+            background: rgba(255, 255, 255, 0.7) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+        }
+
+        body.dark-mode .menustage {
+            background: rgba(15, 23, 42, 0.6) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3) !important;
+            backdrop-filter: blur(15px) !important;
+            -webkit-backdrop-filter: blur(15px) !important;
+        }
+
+        /* Mobile-only overrides to make settings popups behave exactly like Contact Us screen */
+        @media screen and (max-width: 768px) {
+
+            #sidebar-settings-panel .settings-nav,
+            #sidebar-settings-panel .settings-vertical-divider {
+                display: none !important;
+            }
+
+            #sidebar-settings-panel .settings-main-stage {
+                padding: 0px !important;
+            }
+
+            #sidebar-settings-panel {
+                padding: 30px 15px !important;
+                height: 85vh !important;
+            }
+
+            #sidebar-settings-panel .panel-header {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="menustage">
+        <div id="menubardiv">
+            <button class="background">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        <div class="nav-logo">
+            <img src="ldg.png" alt="LDG Logo">
+            <span class="logo-text">DG FRUIT</span>
+        </div>
+        <div class="lesai"><button id="home-btn" class="active"><i class="fa-solid fa-house"></i> Home</button></div>
+        <div class="lesai"><button id="showcases-btn"><i class="fa-solid fa-mountain-sun"></i> Showcases</button></div>
+        <div class="lesai"><button id="learning-btn"><i class="fa-solid fa-book"></i> Learning</button></div>
+        <div class="lesai"><button id="ai-btn"><i class="fa-solid fa-microchip"></i> DG Alephusta</button></div>
+        <div id="more-div">
+            <button id="more-btn"><i class="fa-solid fa-ellipsis-h"></i> More</button>
+        </div>
+        <div id="user-profile" style="display: none;">
+            <div id="profile-popup">
+                <div class="profile-header">
+                    <div class="popup-avatar" id="popup-avatar-preview">U</div>
+                    <div class="user-info">
+                        <span id="user-display-name">Guest</span>
+                        <span id="user-display-email">user@example.com</span>
+                    </div>
+                </div>
+
+                <div class="profile-menu-item" id="signout-link"><i class="fa-solid fa-right-from-bracket"></i> Sign Out
+                </div>
+            </div>
+            <div id="user-avatar" class="avatar-box">U</div>
+            <span id="user-nav-name" class="user-nav-name">Guest</span>
+        </div>
+        <div class="signinbtn">
+            <button id="sgninbtn"><i class="fa-solid fa-circle-user"></i> Sign up</button>
+        </div>
+    </div>
+
+    <div id="sidebar-overlay"></div>
+
+    <div id="dropdown-menu">
+        <div class="menu-content">
+            <button class="menu-btn" id="mobile-home-btn"><i class="fa-solid fa-house"></i> Home</button>
+            <button class="menu-btn" id="dropdown-showcases-btn"><i class="fa-solid fa-mountain-sun"></i>
+                Showcases</button>
+            <button class="menu-btn" id="dropdown-learning-btn"><i class="fa-solid fa-book"></i> Learning</button>
+            <button class="menu-btn" id="mobile-ai-btn"><i class="fa-solid fa-microchip"></i> DG Alephusta</button>
+        </div>
+    </div>
+
+    <div class="informationpalette">
+
+        <div class="palette-hero">
+            <h1 id="home-title" class="home-title animate-fade-in">Home</h1>
+            <p class="hero-subtitle animate-fade-in">Where Code Meets Community</p>
+        </div>
+
+        <div class="home-content-container">
+            <!-- Platform Mission Section -->
+            <section class="home-mission-section animate-fade-in">
+                <div class="mission-card">
+                    <h2>Innovation Driven by Collaboration</h2>
+                    <p>DGFruit isn't just a learning platform—it's a shared ecosystem where developers, creators, and
+                        innovators thrive together. We bridge the gap between abstract concepts and real-world
+                        masterpieces.</p>
+                </div>
+            </section>
+
+            <!-- Feature Hub Grid -->
+            <div class="home-feature-grid">
+                <div class="feature-card animate-fade-in" style="animation-delay: 0.2s">
+                    <div class="feature-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <h3>The Academy</h3>
+                    <p>Dive into high-fidelity learning pathways across Web Development, App Architecture, and Game
+                        Design.</p>
+                    <button class="feature-cta" onclick="window.location.href='Learning/learningindex.html'">Start
+                        Learning</button>
+                </div>
+
+                <div class="feature-card animate-fade-in" style="animation-delay: 0.4s">
+                    <div class="feature-icon"><i class="fa-solid fa-mountain-sun"></i></div>
+                    <h3>Project Showcases</h3>
+                    <p>Discover the pinnacle of community creation. From sophisticated UI designs to complex game
+                        engines.</p>
+                    <button class="feature-cta" onclick="window.location.href='showcases.html'">Explore Portals</button>
+                </div>
+
+                <div class="feature-card animate-fade-in" style="animation-delay: 0.6s">
+                    <div class="feature-icon"><i class="fa-solid fa-user-shield"></i></div>
+                    <h3>Secret Lab</h3>
+                    <p>Unlock our world-class AI companion tools. An elite focal space designed for high-intensity
+                        debugging.</p>
+                    <button class="feature-cta" id="secret-hub-button">Unlock Hub</button>
+                </div>
+
+                <div class="feature-card community-card animate-fade-in" style="animation-delay: 0.8s">
+                    <div class="feature-icon"><i class="fa-solid fa-people-group"></i></div>
+                    <h3>Join Community</h3>
+                    <p>Code, create, and innovate together for <strong>Free</strong>. Be part of an elite collective of
+                        world-class developers.</p>
+                    <button class="feature-cta community-cta">Enter The Hub</button>
+                </div>
+            </div>
+
+            <!-- Stats & Community Footprint -->
+            <div class="home-stats-bar animate-fade-in" style="animation-delay: 1s">
+                <div class="stat-item">
+                    <span class="stat-value">500+</span>
+                    <span class="stat-label">Projects Built</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">12k+</span>
+                    <span class="stat-label">DG Learners</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">24h</span>
+                    <span class="stat-label">Community Pulse</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="settings-container">
+        <div id="settings-popup">
+            <div class="menu-item" id="join-us-btn"><i class="fa-solid fa-user-plus menu-icon"></i> Join Us</div>
+            <div class="menu-item" id="help-btn"><i class="fa-solid fa-circle-question menu-icon"></i> Help Me</div>
+        </div>
+        <button id="settings-btn"><i class="fa-solid fa-ellipsis"></i></button>
+    </div>
+
+    <!-- Global Fixed Sidebar Hub (Promoted to Body Level) -->
+    <div id="sidebar">
+        <div id="close-btn">✖</div>
+
+        <div class="sidebar-scroll-area">
+            <div class="sidebar-branding">
+                <img src="ldg.png" alt="LDG Logo">
+            </div>
+            <hr class="sidebar-divider">
+            <div class="sidebar-social">
+                <button id="sidebar-social-btn" class="sidebar-social-btn">
+                    <i class="fa-solid fa-share-nodes"></i> Social Media
+                    <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem; margin-left: auto;"></i>
+                </button>
+                <div id="sidebar-social-popup" class="sidebar-social-popup">
+                    <a href="https://www.youtube.com/@DG_Fruit" target="_blank" class="social-item youtube"><i
+                            class="fa-brands fa-youtube"></i> YouTube</a>
+                    <a href="https://www.instagram.com/dg.studio.io?utm_source=qr" target="_blank"
+                        class="social-item instagram"><i class="fa-brands fa-instagram"></i> Instagram</a>
+                    <a href="https://discord.gg/GmfvU3sYCW" target="_blank" class="social-item discord"><i
+                            class="fa-brands fa-discord"></i> Discord</a>
+                    <a href="https://github.com/DG-STUDIOIO" target="_blank" class="social-item github"><i
+                            class="fa-brands fa-github"></i> GitHub</a>
+                </div>
+            </div>
+
+            <div class="sidebar-social">
+                <button id="contact-btn" class="sidebar-social-btn">
+                    <i class="fa-solid fa-envelope"></i> Contact Us
+                </button>
+            </div>
+
+            <div class="sidebar-social">
+                <button id="about-btn" class="sidebar-social-btn">
+                    <i class="fa-solid fa-circle-info"></i> About Us
+                </button>
+            </div>
+
+            <div class="sidebar-social">
+                <button id="sidebar-settings-opener" class="sidebar-social-btn">
+                    <i class="fa-solid fa-gear"></i> Settings
+                    <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem; margin-left: auto;"></i>
+                </button>
+                <div id="sidebar-settings-dropdown" class="sidebar-social-popup">
+                    <button class="social-item settings-nav-item active" data-target="account-hub"><i
+                            class="fa-solid fa-user-gear"></i> Account Hub</button>
+                    <button class="social-item settings-nav-item" data-target="appearance-hub"><i
+                            class="fa-solid fa-palette"></i> Appearance</button>
+                    <button class="social-item settings-nav-item" data-target="privacy-hub"><i
+                            class="fa-solid fa-shield-halved"></i> Privacy Gate</button>
+                    <button class="social-item settings-nav-item" data-target="notifications-hub"><i
+                            class="fa-solid fa-bell"></i> Notifications</button>
+                    <button class="social-item settings-nav-item" data-target="support-hub"><i
+                            class="fa-solid fa-circle-info"></i> Support</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- World-Class Sidebar Settings Modal Hub -->
+    <div id="settings-panel-overlay" class="panel-overlay">
+        <div id="sidebar-settings-panel" class="settings-aside-panel">
+            <div class="panel-header">
+                <span id="close-settings-panel">✖</span>
+            </div>
+            <div class="panel-content split-layout">
+                <!-- Settings Navigation (Left Sidebar) -->
+                <div class="settings-nav">
+                    <button class="settings-nav-item active" data-target="account-hub">
+                        <i class="fa-solid fa-user-gear"></i> Account Hub
+                    </button>
+                    <button class="settings-nav-item" data-target="appearance-hub">
+                        <i class="fa-solid fa-palette"></i> Appearance
+                    </button>
+                    <button class="settings-nav-item" data-target="privacy-hub">
+                        <i class="fa-solid fa-shield-halved"></i> Privacy Gate
+                    </button>
+                    <button class="settings-nav-item" data-target="notifications-hub">
+                        <i class="fa-solid fa-bell"></i> Notifications
+                    </button>
+                    <button class="settings-nav-item" data-target="support-hub">
+                        <i class="fa-solid fa-circle-info"></i> Support
+                    </button>
+                </div>
+
+                <!-- Authoritative Vertical Divider Hub -->
+                <div class="settings-vertical-divider"></div>
+
+                <!-- World-Class Settings Main Content Area (Right - Large) -->
+                <div id="settings-stage" class="settings-main-stage">
+                    <div id="settings-dynamic-view"
+                        style="display:flex; flex-direction:column; gap: 40px; padding-bottom: 40px;">
+                        <div id="settings-stage-placeholder"
+                            style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--text-muted); text-align: center; padding: 40px;">
+                            <i class="fa-solid fa-gear" style="font-size: 3rem; margin-bottom: 20px; opacity: 0.2;"></i>
+                            <p>Select an option from the menu to configure your settings.</p>
+                        </div>
+                    </div>
+
+                    <!-- Settings Portal Templates -->
+
+
+
+                    <template id="template-appearance-hub">
+                        <div class="theme-portal-container" id="appearance-hub">
+                            <h3><i class="fa-solid fa-palette" style="color: var(--accent-blue);"></i> Select a Theme
+                            </h3>
+                            <p class="theme-desc">Customise your digital experience with our theme protocols</p>
+
+                            <div class="theme-grid">
+                                <div class="theme-card light-theme" id="set-theme-light">
+                                    <div class="theme-preview">
+                                        <div class="preview-dot" style="background: #ffffff; border: 1px solid #ddd;">
+                                        </div>
+                                    </div>
+                                    <span>Light Mode</span>
+                                </div>
+                                <div class="theme-card dark-theme" id="set-theme-dark">
+                                    <div class="theme-preview">
+                                        <div class="preview-dot" style="background: #0f172a;"></div>
+                                    </div>
+                                    <span>Dark Mode</span>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template id="template-notifications-hub">
+                        <div class="notifications-focal-stage" id="notifications-hub">
+                            <p class="large-empty-message">No notifications yet!</p>
+                        </div>
+                    </template>
+
+                    <template id="template-privacy-hub">
+                        <div class="privacy-hub-container" id="privacy-hub">
+                            <h2><i class="fa-solid fa-shield-halved" style="color: var(--accent-blue);"></i> Privacy &
+                                Security</h2>
+                            <p class="section-desc">Manage your account security and privacy settings</p>
+
+                            <!-- Password Management Section -->
+                            <div class="privacy-section">
+                                <div class="section-header">
+                                    <div class="section-icon">
+                                        <i class="fa-solid fa-lock"></i>
+                                    </div>
+                                    <div class="section-info">
+                                        <h4>Password Manager</h4>
+                                        <p>Change your password to keep your account secure</p>
+                                    </div>
+                                </div>
+                                <div class="section-content">
+                                    <div class="password-status">
+                                        <div class="status-indicator strong">
+                                            <i class="fa-solid fa-check-circle"></i>
+                                            <span>Strong Password</span>
+                                        </div>
+                                        <p class="status-detail">Last changed 90 days ago</p>
+                                    </div>
+                                    <button class="privacy-action-btn primary" id="change-password-btn">
+                                        <i class="fa-solid fa-key"></i>
+                                        Change Password
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Two-Factor Authentication Section -->
+                            <div class="privacy-section">
+                                <div class="section-header">
+                                    <div class="section-icon">
+                                        <i class="fa-solid fa-mobile-screen-button"></i>
+                                    </div>
+                                    <div class="section-info">
+                                        <h4>Two-Factor Authentication</h4>
+                                        <p>Add an extra layer of security to your account</p>
+                                    </div>
+                                </div>
+                                <div class="section-content">
+                                    <div class="tfa-status">
+                                        <div class="status-badge enabled">
+                                            <i class="fa-solid fa-circle-check"></i>
+                                            Enabled
+                                        </div>
+                                        <p class="status-detail">Authenticator App (Google Authenticator)</p>
+                                    </div>
+                                    <div class="backup-codes">
+                                        <span class="code-label"><i class="fa-solid fa-code"></i> 8 Backup Codes
+                                            Remaining</span>
+                                    </div>
+                                    <button class="privacy-action-btn secondary">
+                                        <i class="fa-solid fa-refresh"></i>
+                                        Regenerate Codes
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Active Sessions Section -->
+                            <div class="privacy-section">
+                                <div class="section-header">
+                                    <div class="section-icon">
+                                        <i class="fa-solid fa-laptop"></i>
+                                    </div>
+                                    <div class="section-info">
+                                        <h4>Active Sessions</h4>
+                                        <p>Manage your active login sessions</p>
+                                    </div>
+                                </div>
+                                <div class="section-content">
+                                    <div class="session-item current">
+                                        <div class="session-device">
+                                            <i class="fa-solid fa-laptop"></i>
+                                            <div class="device-info">
+                                                <span class="device-name">Chrome on Windows</span>
+                                                <span class="device-location">Current Session</span>
+                                            </div>
+                                        </div>
+                                        <span class="session-badge current">Active Now</span>
+                                    </div>
+                                    <div class="session-item">
+                                        <div class="session-device">
+                                            <i class="fa-solid fa-mobile"></i>
+                                            <div class="device-info">
+                                                <span class="device-name">Safari on iPhone</span>
+                                                <span class="device-location">Last active 2 hours ago</span>
+                                            </div>
+                                        </div>
+                                        <button class="session-action-btn">
+                                            <i class="fa-solid fa-times"></i>
+                                        </button>
+                                    </div>
+                                    <button class="privacy-action-btn secondary">
+                                        <i class="fa-solid fa-sign-out-alt"></i>
+                                        Sign Out All Other Sessions
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Login History Section -->
+                            <div class="privacy-section">
+                                <div class="section-header">
+                                    <div class="section-icon">
+                                        <i class="fa-solid fa-history"></i>
+                                    </div>
+                                    <div class="section-info">
+                                        <h4>Login History</h4>
+                                        <p>Recent login activity on your account</p>
+                                    </div>
+                                </div>
+                                <div class="section-content">
+                                    <div class="login-history">
+                                        <div class="history-item">
+                                            <div class="history-icon success">
+                                                <i class="fa-solid fa-check"></i>
+                                            </div>
+                                            <div class="history-details">
+                                                <span class="history-time">Today at 10:30 AM</span>
+                                                <span class="history-location">Chrome on Windows • IP:
+                                                    192.168.1.x</span>
+                                            </div>
+                                        </div>
+                                        <div class="history-item">
+                                            <div class="history-icon success">
+                                                <i class="fa-solid fa-check"></i>
+                                            </div>
+                                            <div class="history-details">
+                                                <span class="history-time">Yesterday at 3:45 PM</span>
+                                                <span class="history-location">Safari on iPhone • IP: 192.168.1.y</span>
+                                            </div>
+                                        </div>
+                                        <div class="history-item">
+                                            <div class="history-icon failed">
+                                                <i class="fa-solid fa-x"></i>
+                                            </div>
+                                            <div class="history-details">
+                                                <span class="history-time">2 days ago at 9:15 AM</span>
+                                                <span class="history-location">Failed Login Attempt • IP:
+                                                    203.0.113.x</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Privacy Settings Section -->
+                            <div class="privacy-section">
+                                <div class="section-header">
+                                    <div class="section-icon">
+                                        <i class="fa-solid fa-eye-slash"></i>
+                                    </div>
+                                    <div class="section-info">
+                                        <h4>Privacy Settings</h4>
+                                        <p>Control your privacy preferences</p>
+                                    </div>
+                                </div>
+                                <div class="section-content privacy-toggles">
+                                    <div class="toggle-item">
+                                        <div class="toggle-label">
+                                            <span>Profile Visibility</span>
+                                            <small>Allow others to see your profile</small>
+                                        </div>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="profile-visibility" checked>
+                                            <label for="profile-visibility"></label>
+                                        </div>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <div class="toggle-label">
+                                            <span>Show Online Status</span>
+                                            <small>Let others know when you're online</small>
+                                        </div>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="online-status" checked>
+                                            <label for="online-status"></label>
+                                        </div>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <div class="toggle-label">
+                                            <span>Email Notifications</span>
+                                            <small>Receive email updates from DGFruit</small>
+                                        </div>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="email-notify" checked>
+                                            <label for="email-notify"></label>
+                                        </div>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <div class="toggle-label">
+                                            <span>Marketing Communications</span>
+                                            <small>Receive news and special offers</small>
+                                        </div>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="marketing-comms">
+                                            <label for="marketing-comms"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Data Management Section -->
+                            <div class="privacy-section last-section">
+                                <div class="section-header">
+                                    <div class="section-icon">
+                                        <i class="fa-solid fa-download"></i>
+                                    </div>
+                                    <div class="section-info">
+                                        <h4>Data Management</h4>
+                                        <p>Download or delete your account data</p>
+                                    </div>
+                                </div>
+                                <div class="section-content data-management">
+                                    <button class="privacy-action-btn secondary">
+                                        <i class="fa-solid fa-download"></i>
+                                        Download My Data
+                                    </button>
+                                    <button class="privacy-action-btn danger">
+                                        <i class="fa-solid fa-trash"></i>
+                                        Delete Account
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template id="template-support-hub">
+                        <div class="support-portal-container" id="support-hub">
+                            <div class="support-header">
+                                <div class="support-header-icon">
+                                    <i class="fa-solid fa-life-ring"></i>
+                                </div>
+                                <div class="support-header-content">
+                                    <h3>Support Center</h3>
+                                    <p class="support-desc">Get help with your DGFruit experience. We're here to assist
+                                        you 24/7.</p>
+                                </div>
+                            </div>
+
+                            <div class="support-grid">
+                                <div class="support-card primary">
+                                    <div class="support-card-header">
+                                        <div class="support-icon email">
+                                            <i class="fa-solid fa-envelope"></i>
+                                        </div>
+                                        <div class="support-badge">Recommended</div>
+                                    </div>
+                                    <div class="support-card-content">
+                                        <h4>Email Support</h4>
+                                        <p>Get personalized help from our expert team within 2 hours</p>
+                                        <div class="support-features">
+                                            <span class="feature-tag"><i class="fa-solid fa-clock"></i> 24/7
+                                                Available</span>
+                                            <span class="feature-tag"><i class="fa-solid fa-user-tie"></i> Expert
+                                                Help</span>
+                                        </div>
+                                    </div>
+                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=dgfruit0@gmail.com"
+                                        target="_blank" rel="noopener noreferrer" class="support-link primary">
+                                        <i class="fa-solid fa-paper-plane"></i>
+                                        Contact Support
+                                    </a>
+                                </div>
+
+                                <div class="support-card">
+                                    <div class="support-card-header">
+                                        <div class="support-icon docs">
+                                            <i class="fa-solid fa-book-open"></i>
+                                        </div>
+                                    </div>
+                                    <div class="support-card-content">
+                                        <h4>Documentation</h4>
+                                        <p>Explore our comprehensive guides and tutorials</p>
+                                        <div class="support-features">
+                                            <span class="feature-tag"><i class="fa-solid fa-graduation-cap"></i>
+                                                Step-by-Step</span>
+                                            <span class="feature-tag"><i class="fa-solid fa-search"></i>
+                                                Searchable</span>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="support-link">
+                                        <i class="fa-solid fa-external-link"></i>
+                                        View Docs
+                                    </a>
+                                </div>
+
+                                <div class="support-card">
+                                    <div class="support-card-header">
+                                        <div class="support-icon community">
+                                            <i class="fa-solid fa-users"></i>
+                                        </div>
+                                    </div>
+                                    <div class="support-card-content">
+                                        <h4>Community Forum</h4>
+                                        <p>Connect with other developers and get peer support</p>
+                                        <div class="support-features">
+                                            <span class="feature-tag"><i class="fa-solid fa-comments"></i>
+                                                Discussions</span>
+                                            <span class="feature-tag"><i class="fa-solid fa-heart"></i> Community</span>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="support-link">
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                        Join Discussion
+                                    </a>
+                                </div>
+
+                                <div class="support-card">
+                                    <div class="support-card-header">
+                                        <div class="support-icon bug">
+                                            <i class="fa-solid fa-bug"></i>
+                                        </div>
+                                    </div>
+                                    <div class="support-card-content">
+                                        <h4>Report Issues</h4>
+                                        <p>Found a bug? Help us improve by reporting it</p>
+                                        <div class="support-features">
+                                            <span class="feature-tag"><i class="fa-solid fa-tools"></i> Quick Fix</span>
+                                            <span class="feature-tag"><i class="fa-solid fa-star"></i> Rewards</span>
+                                        </div>
+                                    </div>
+                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=dgfruit0@gmail.com"
+                                        target="_blank" rel="noopener noreferrer" class="support-link">
+                                        <i class="fa-solid fa-flag"></i>
+                                        Report Bug
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="support-status">
+                                <div class="status-header">
+                                    <div class="status-indicator online">
+                                        <i class="fa-solid fa-circle"></i>
+                                        Support Online
+                                    </div>
+                                    <div class="status-stats">
+                                        <div class="stat">
+                                            <span class="stat-number">2h</span>
+                                            <span class="stat-label">Avg Response</span>
+                                        </div>
+                                        <div class="stat">
+                                            <span class="stat-number">98%</span>
+                                            <span class="stat-label">Satisfaction</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="support-quick-links">
+                                    <a href="#" class="quick-link">
+                                        <i class="fa-solid fa-question-circle"></i>
+                                        FAQ
+                                    </a>
+                                    <a href="#" class="quick-link">
+                                        <i class="fa-solid fa-video"></i>
+                                        Tutorials
+                                    </a>
+                                    <a href="#" class="quick-link">
+                                        <i class="fa-solid fa-newspaper"></i>
+                                        Changelog
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template id="template-account-hub">
+                        <div class="account-hub-container" id="account-hub">
+                            <!-- Account Profile Overview -->
+                            <div class="account-section profile-section">
+                                <div class="section-header-account">
+                                    <i class="fa-solid fa-user-circle"></i>
+                                    <h3>Your Profile</h3>
+                                </div>
+                                <div class="profile-card">
+                                    <div class="profile-avatar-large-wrapper">
+                                        <div class="profile-avatar-large" id="account-avatar-large">U</div>
+                                        <button class="avatar-edit-btn" id="change-photo-btn"><i
+                                                class="fa-solid fa-camera"></i></button>
+
+                                        <input type="file" id="avatar-upload-input" accept="image/*"
+                                            style="display: none;">
+                                    </div>
+                                    <div class="profile-details">
+                                        <div class="name-edit-wrapper">
+                                            <h4 id="account-display-name">Guest User</h4>
+                                            <button class="inline-edit-btn" id="edit-username-btn"><i
+                                                    class="fa-solid fa-pen"></i></button>
+                                        </div>
+                                        <p id="account-display-email">user@example.com</p>
+                                        <span class="user-id">ID: DG-774291</span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- Security & Privacy -->
+                            <div class="account-section security-section">
+                                <div class="section-header-account">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                    <h3>Security & Privacy</h3>
+                                </div>
+                                <div class="security-grid">
+                                    <div class="security-item">
+                                        <div class="security-icon password">
+                                            <i class="fa-solid fa-key"></i>
+                                        </div>
+                                        <div class="security-content">
+                                            <h4>Password</h4>
+                                            <p style="color: #ef4444; font-weight: 700;">Expires in 40 days (Security
+                                                Policy)</p>
+                                        </div>
+                                        <button class="security-action-btn" id="change-pswd-btn">Change</button>
+                                    </div>
+
+                                    <div class="security-item">
+                                        <div class="security-icon device">
+                                            <i class="fa-solid fa-laptop"></i>
+                                        </div>
+                                        <div class="security-content">
+                                            <h4>Active Sessions</h4>
+                                            <p>3 devices active</p>
+                                        </div>
+                                        <button class="security-action-btn" id="view-sessions-btn">View</button>
+                                    </div>
+                                    <div class="security-item">
+                                        <div class="security-icon login">
+                                            <i class="fa-solid fa-lock-open"></i>
+                                        </div>
+                                        <div class="security-content">
+                                            <h4>Login Activity</h4>
+                                            <p>Last login today at 10:45 AM</p>
+                                        </div>
+                                        <button class="security-action-btn" id="view-logs-btn">View Log</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Linked Accounts -->
+                            <div class="account-section linked-accounts-section">
+                                <div class="section-header-account">
+                                    <i class="fa-solid fa-link"></i>
+                                    <h3>Connected Services</h3>
+                                </div>
+                                <div class="linked-accounts-grid">
+                                    <div class="linked-account">
+                                        <div class="account-provider github">
+                                            <i class="fa-brands fa-github"></i>
+                                        </div>
+                                        <div class="account-info">
+                                            <h5>GitHub</h5>
+                                            <p>Connected</p>
+                                        </div>
+                                        <button class="connection-btn disconnect"><i class="fa-solid fa-unlink"></i>
+                                            Disconnect</button>
+                                    </div>
+                                    <div class="linked-account">
+                                        <div class="account-provider google">
+                                            <i class="fa-brands fa-google"></i>
+                                        </div>
+                                        <div class="account-info">
+                                            <h5>Google</h5>
+                                            <p>Connected</p>
+                                        </div>
+                                        <button class="connection-btn disconnect"><i class="fa-solid fa-unlink"></i>
+                                            Disconnect</button>
+                                    </div>
+                                    <div class="linked-account">
+                                        <div class="account-provider discord">
+                                            <i class="fa-brands fa-discord"></i>
+                                        </div>
+                                        <div class="account-info">
+                                            <h5>Discord</h5>
+                                            <p>Not connected</p>
+                                        </div>
+                                        <button class="connection-btn connect"><i class="fa-solid fa-link"></i>
+                                            Connect</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Preferences -->
+                            <div class="account-section preferences-section">
+                                <div class="section-header-account">
+                                    <i class="fa-solid fa-sliders"></i>
+                                    <h3>Preferences</h3>
+                                </div>
+                                <div class="preferences-list">
+                                    <div class="preference-item">
+                                        <div class="preference-content">
+                                            <h5>Email Notifications</h5>
+                                            <p>Receive updates and news</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="preference-item">
+                                        <div class="preference-content">
+                                            <h5>Learning Reminders</h5>
+                                            <p>Daily study notifications</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="preference-item">
+                                        <div class="preference-content">
+                                            <h5>Marketing Emails</h5>
+                                            <p>Promotions and offers</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="preference-item">
+                                        <div class="preference-content">
+                                            <h5>Public Profile</h5>
+                                            <p>Show your progress publicly</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Account Actions -->
+                            <div class="account-section actions-section">
+                                <button class="account-action-btn delete-account">
+                                    <i class="fa-solid fa-trash"></i>
+                                    Delete Account
+                                </button>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- World-Class Help Modal (Arrival Hub) -->
+
+    <!-- Contact Us Modal Overlay -->
+    <div id="contact-overlay" class="panel-overlay">
+        <div id="contact-modal" class="contact-aside-panel">
+            <div class="panel-header">
+                <span id="close-contact-modal">✖</span>
+            </div>
+            <div class="panel-content">
+                <div class="contact-header-section">
+                    <div class="contact-header-icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <h2>Contact Us</h2>
+                    <p>Get in touch with our team</p>
+                </div>
+
+                <div class="contact-content">
+                    <div class="contact-grid">
+                        <div class="contact-card">
+                            <div class="contact-card-icon">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <h4>Email Support</h4>
+                            <p>Get direct assistance from our technical team</p>
+                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=dgfruit0@gmail.com" target="_blank"
+                                rel="noopener noreferrer" class="contact-link primary">
+                                <i class="fa-solid fa-envelope"></i>
+                                dgfruit0@gmail.com
+                            </a>
+                            <div class="contact-meta">
+                                <span><i class="fa-solid fa-clock"></i> Response within 2 hours</span>
+                            </div>
+                        </div>
+
+                        <div class="contact-card">
+                            <div class="contact-card-icon">
+                                <i class="fa-solid fa-comments"></i>
+                            </div>
+                            <h4>Community Chat</h4>
+                            <p>Join our Discord community for real-time discussions</p>
+                            <a href="https://discord.gg/GmfvU3sYCW" target="_blank" class="contact-link secondary">
+                                <i class="fa-brands fa-discord"></i>
+                                Join Discord
+                            </a>
+                            <div class="contact-meta">
+                                <span><i class="fa-solid fa-users"></i> 10,000+ members</span>
+                            </div>
+                        </div>
+
+                        <div class="contact-card">
+                            <div class="contact-card-icon">
+                                <i class="fa-solid fa-code"></i>
+                            </div>
+                            <h4>GitHub Issues</h4>
+                            <p>Report bugs or request features on our repository</p>
+                            <a href="https://github.com/DG-STUDIOIO" target="_blank" class="contact-link tertiary">
+                                <i class="fa-brands fa-github"></i>
+                                Open Issue
+                            </a>
+                            <div class="contact-meta">
+                                <span><i class="fa-solid fa-bug"></i> Bug reports welcome</span>
+                            </div>
+                        </div>
+
+                        <div class="contact-card">
+                            <div class="contact-card-icon">
+                                <i class="fa-solid fa-globe"></i>
+                            </div>
+                            <h4>Business Inquiries</h4>
+                            <p>Partnerships, collaborations, and business opportunities</p>
+                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=dgfruit0@gmail.com" target="_blank"
+                                rel="noopener noreferrer" class="contact-link quaternary">
+                                <i class="fa-solid fa-handshake"></i>
+                                dgfruit0@gmail.com
+                            </a>
+                            <div class="contact-meta">
+                                <span><i class="fa-solid fa-building"></i> Enterprise solutions</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Us Modal Overlay -->
+    <div id="about-overlay" class="panel-overlay">
+        <div id="about-modal" class="about-aside-panel">
+            <div class="panel-header">
+                <span id="close-about-modal">✖</span>
+            </div>
+            <div class="panel-content">
+                <div class="about-header-section">
+                    <div class="about-header-icon">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </div>
+                    <h2>About DG FRUIT</h2>
+                    <p>Elevating the digital standard</p>
+                </div>
+
+                <div class="about-content">
+                    <div class="about-hero">
+                        <div class="about-hero-content">
+                            <h3>Elevating the Digital Standard</h3>
+                            <p>DG FRUIT is a premier learning platform dedicated to empowering developers, creators, and
+                                innovators with cutting-edge tools, comprehensive education, and a vibrant community
+                                ecosystem.</p>
+                        </div>
+                        <div class="about-hero-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">50K+</div>
+                                <div class="stat-label">Active Learners</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">100+</div>
+                                <div class="stat-label">Expert Courses</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">24/7</div>
+                                <div class="stat-label">AI Support</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-mission">
+                        <div class="mission-content">
+                            <h4>Our Mission</h4>
+                            <p>To democratize access to world-class programming education and AI-powered development
+                                tools, fostering a global community of skilled developers who push the boundaries of
+                                what's possible in technology.</p>
+                        </div>
+                        <div class="mission-values">
+                            <div class="value-item">
+                                <div class="value-icon">
+                                    <i class="fa-solid fa-lightbulb"></i>
+                                </div>
+                                <h5>Innovation</h5>
+                                <p>Constantly evolving our platform with the latest technologies and methodologies.</p>
+                            </div>
+                            <div class="value-item">
+                                <div class="value-icon">
+                                    <i class="fa-solid fa-users"></i>
+                                </div>
+                                <h5>Community</h5>
+                                <p>Building a supportive ecosystem where learners help each other grow.</p>
+                            </div>
+                            <div class="value-item">
+                                <div class="value-icon">
+                                    <i class="fa-solid fa-shield-alt"></i>
+                                </div>
+                                <h5>Excellence</h5>
+                                <p>Maintaining the highest standards in education and technical support.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-team">
+                        <h4>Meet Our Team</h4>
+                        <div class="team-grid">
+                            <div class="team-member">
+                                <div class="member-avatar">
+                                    <i class="fa-solid fa-user-tie"></i>
+                                </div>
+                                <h5>Development Team</h5>
+                                <p>Expert developers and engineers crafting the next generation of learning tools.</p>
+                            </div>
+                            <div class="team-member">
+                                <div class="member-avatar">
+                                    <i class="fa-solid fa-chalkboard-teacher"></i>
+                                </div>
+                                <h5>Educational Experts</h5>
+                                <p>Industry veterans and educators designing comprehensive learning experiences.</p>
+                            </div>
+                            <div class="team-member">
+                                <div class="member-avatar">
+                                    <i class="fa-solid fa-robot"></i>
+                                </div>
+                                <h5>AI Specialists</h5>
+                                <p>Machine learning engineers developing intelligent coding assistants.</p>
+                            </div>
+                            <div class="team-member">
+                                <div class="member-avatar">
+                                    <i class="fa-solid fa-headset"></i>
+                                </div>
+                                <h5>Support Team</h5>
+                                <p>Dedicated professionals ensuring every learner gets the help they need.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Community Hub (Discord) Modal Overlay -->
+    <div id="community-hub-overlay" class="panel-overlay">
+        <div id="community-hub-modal" class="contact-aside-panel">
+            <div class="panel-header">
+                <span id="close-community-modal">✖</span>
+            </div>
+            <div class="panel-content">
+                <div class="contact-header-section">
+                    <div class="contact-header-icon" style="background: rgba(88, 101, 242, 0.1); color: #5865F2;">
+                        <i class="fa-brands fa-discord"></i>
+                    </div>
+                    <h2>The Digital Hub</h2>
+                    <p>Join our elite developer collective</p>
+                </div>
+
+                <div class="hub-invitation-card">
+                    <div class="hub-card-content">
+                        <h3>Your Invitation Awaits</h3>
+                        <p>Step into the heartbeat of DG FRUIT. Collaborative debugging, exclusive resources, and global
+                            networking.</p>
+
+                        <div class="invitation-features">
+                            <div class="inv-feature">
+                                <i class="fa-solid fa-bolt"></i>
+                                <span>Real-time Support</span>
+                            </div>
+                            <div class="inv-feature">
+                                <i class="fa-solid fa-shield-halved"></i>
+                                <span>Exclusive Beta Access</span>
+                            </div>
+                            <div class="inv-feature">
+                                <i class="fa-solid fa-globe"></i>
+                                <span>Global Networking</span>
+                            </div>
+                        </div>
+
+                        <div class="invite-link-box">
+                            <span class="invite-label">Discord Invite Link</span>
+                            <div class="link-display">
+                                <input type="text" value="https://discord.gg/GmfvU3sYCW" readonly
+                                    id="discord-invite-input">
+                                <button id="copy-discord-link" title="Copy Link"><i
+                                        class="fa-solid fa-copy"></i></button>
+                            </div>
+                        </div>
+
+                        <a href="https://discord.gg/GmfvU3sYCW" target="_blank" class="hub-join-btn">
+                            <i class="fa-brands fa-discord"></i>
+                            Enter The Hub Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign In Required Modal -->
+    <div id="signin-required-modal" class="signin-required-modal-overlay">
+        <div class="signin-required-modal-content">
+            <div class="signin-required-header">
+                <div class="signin-required-icon">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h2>Sign In Required</h2>
+                <div id="close-signin-required-modal" class="modal-close-btn">✖</div>
+            </div>
+            <div class="signin-required-body">
+                <div class="signin-required-message">
+                    <h3>Access the Secret Lab</h3>
+                    <p>To unlock our advanced AI-powered coding assistant and premium features, you need to sign in to
+                        your account.</p>
+                    <div class="signin-required-features">
+                        <div class="feature-item">
+                            <i class="fa-solid fa-robot"></i>
+                            <span>AI Coding Assistant</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fa-solid fa-code"></i>
+                            <span>Advanced Code Generation</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fa-solid fa-brain"></i>
+                            <span>Intelligent Debugging</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            <span>Personalized Learning</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="signin-required-actions">
+                    <button id="signin-required-btn" class="signin-required-primary-btn">
+                        <i class="fa-solid fa-sign-in-alt"></i>
+                        Sign In Now
+                    </button>
+                    <button id="learn-more-btn" class="signin-required-secondary-btn">
+                        <i class="fa-solid fa-info-circle"></i>
+                        Learn More
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Configuration Modal (Formal) -->
+    <div id="username-modal-overlay" class="panel-overlay">
+        <div class="profile-modal">
+            <div class="modal-header">
+                <i class="fa-solid fa-user-pen"></i>
+                <h2>Profile Configuration</h2>
+                <span id="close-username-modal">✖</span>
+            </div>
+            <div class="modal-body">
+                <p>Update your world-class display name across the DG FRUIT ecosystem.</p>
+                <div class="formal-input-group">
+                    <label for="new-username-input">Display Name</label>
+                    <input type="text" id="new-username-input" placeholder="Enter your authoritative name...">
+                </div>
+                <div class="modal-actions">
+                    <button class="modal-btn secondary" id="cancel-username-btn">Cancel</button>
+                    <button class="modal-btn primary" id="save-username-btn">Update Profile</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Security Intelligence Modal (Formal) -->
+    <div id="security-logs-overlay" class="panel-overlay">
+        <div class="profile-modal logs-modal">
+            <div class="modal-header">
+                <i class="fa-solid fa-bug-slash"></i>
+                <h2 id="security-logs-title">Security Intelligence</h2>
+                <span id="close-security-modal">✖</span>
+            </div>
+            <div class="modal-body">
+                <div id="security-logs-container" class="logs-container">
+                    <!-- Logs dynamically injected here -->
+                </div>
+                <div class="modal-actions">
+                    <button class="modal-btn secondary" id="close-logs-btn">Acknowledge</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase Authority Hub -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+
+    <script src="web.js"></script>
+</body>
+
+</html>
