@@ -1,0 +1,216 @@
+:root {
+    /* YouTube 2D-Glass Protocol Hub */
+    --yt-red: #FF0000; /* Absolute YouTube Vibrant Red Hub */
+    --yt-dark-red: #DD0000;
+    --bg-light: #f4f5f7;
+    --bg-dark: #0a0a0b;
+    --glass-white: rgba(255, 255, 255, 0.65);
+    --glass-dark: rgba(255, 255, 255, 0.02);
+    --border-light: rgba(0, 0, 0, 0.06);
+    --border-dark: rgba(255, 255, 255, 0.08);
+    --text-main-light: #0f0f0f;
+    --text-main-dark: #ffffff;
+    --glass-btn-bg: rgba(255, 255, 255, 0.4);
+    --glass-btn-border: rgba(255, 255, 255, 0.6);
+}
+
+body.dark-mode {
+    --glass-btn-bg: rgba(255, 255, 255, 0.05);
+    --glass-btn-border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg-light);
+    color: var(--text-main-light);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode {
+    background: var(--bg-dark);
+    color: var(--text-main-dark);
+}
+
+/* --- Absolute 2D-Glassmorphism Hub --- */
+.container-hero {
+    width: 100%;
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 20px 40px;
+    background: transparent; /* Absolute Content-Floating Hub */
+    border: none; /* Hero-Border Neutralization Protocol */
+    backdrop-filter: none;
+}
+
+body.dark-mode .container-hero {
+    background: var(--glass-dark);
+    border: 1px solid var(--border-dark);
+}
+
+/* --- Interaction Gateways --- */
+header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.main-brand-hub {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px; /* High-Performance Proximity Protocol Hub */
+    margin-bottom: 35px;
+}
+
+.main-logo-arrival {
+    width: 450px;
+    max-width: 95%;
+    height: auto;
+    filter: drop-shadow(0 15px 30px rgba(0,0,0,0.1));
+}
+
+.branding-text-arrival {
+    font-size: 3.5rem;
+    font-weight: 800;
+    letter-spacing: -3px;
+    margin: 0;
+}
+
+.text-black { color: #000000; }
+body.dark-mode .text-black { color: #ffffff; }
+.text-red { color: var(--yt-red); }
+
+/* --- High-Fidelity Glass Button Protocol --- */
+.glass-btn {
+    background: var(--glass-btn-bg);
+    backdrop-filter: blur(12px);
+    border: 2px solid rgba(255, 255, 255, 0.4); /* High-Definition Glass Border Hub */
+    border-radius: 14px;
+    padding: 12px 28px;
+    font-weight: 700;
+    color: inherit;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-btn:hover {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(255, 255, 255, 0.8);
+    transform: translateY(-2px);
+}
+
+body.dark-mode .glass-btn {
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* --- Tabs Equilibrium --- */
+.tabs-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.tab-opt {
+    padding: 14px 35px;
+}
+
+.tab-opt.active {
+    background: var(--yt-red);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3); /* Vibrant Active Border Hub */
+    box-shadow: 0 10px 25px rgba(255, 0, 0, 0.3);
+}
+
+/* --- Narrow Interaction Protocol --- */
+.input-hub {
+    max-width: 450px;
+    margin: 0 auto 80px;
+}
+
+input[type="text"], select {
+    width: 100%;
+    padding: 20px 25px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--border-light);
+    border-radius: 18px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: inherit;
+    outline: none;
+    margin-bottom: 25px;
+}
+
+input[type="text"]:focus {
+    border-color: var(--yt-red);
+}
+
+.gen-btn-red {
+    width: 100%;
+    padding: 20px;
+    background: var(--yt-red);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.4); /* Pure YouTube Border Hub */
+    border-radius: 18px;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 1.15rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 15px 35px rgba(255, 0, 0, 0.4);
+    transition: all 0.2s ease;
+}
+
+.gen-btn-red:hover {
+    background: var(--yt-dark-red);
+    transform: translateY(-2px);
+    box-shadow: 0 20px 50px rgba(255, 0, 0, 0.5);
+}
+
+/* --- Dynamic Content Gate --- */
+.result-card {
+    background: rgba(255, 255, 255, 0.05); /* Extra-Clear Hub */
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-light);
+    border-radius: 24px;
+    padding: 40px;
+    margin-top: 40px;
+}
+
+.theme-toggle-container {
+    position: fixed;
+    top: 40px;
+    right: 40px;
+}
+
+.theme-btn {
+    width: 60px;
+    height: 60px;
+}
+
+/* --- Utility Hub --- */
+.animate-pop-in {
+    animation: popIn 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.loading-ring {
+    width: 60px;
+    height: 60px;
+    border: 6px solid var(--border-light);
+    border-top: 6px solid var(--yt-red);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DG Automate AI | YouTube Red Protocol</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="theme-toggle-container">
+        <button id="theme-toggle" class="glass-btn theme-btn">
+            <i data-lucide="moon" class="dark-icon"></i>
+            <i data-lucide="sun" class="light-icon"></i>
+        </button>
+    </div>
+
+    <div class="container-hero">
+        <header class="animate-pop-in">
+            <div class="main-brand-hub">
+                <img src="../Modern_logo_with_play_button_and_gear-removebg-preview.png" alt="DG Automate Logo" class="main-logo-arrival">
+                <h1 class="branding-text-arrival">
+                    <span class="text-black">DG-Automate</span> <span class="text-red">AI</span>
+                </h1>
+            </div>
+            <p style="color: var(--text-secondary); font-weight: 700; font-size: 1.1rem; margin-top: 10px;">The Authoritative YouTube Automation Hub</p>
+            
+            <div class="tabs-container">
+                <button id="tab-generator" class="glass-btn tab-opt active">
+                    <i data-lucide="zap"></i> Generator
+                </button>
+                <button id="tab-automation" class="glass-btn tab-opt">
+                    <i data-lucide="clock"></i> Automation
+                </button>
+            </div>
+        </header>
+
+        <!-- Generator View -->
+        <div id="view-generator" class="animate-pop-in">
+            <div class="input-hub">
+                <input type="text" id="generator-input" placeholder="Paste your niche or content idea here...">
+                <button id="generator-submit" class="gen-btn-red">
+                    Generate
+                </button>
+            </div>
+
+            <div id="generator-loading" class="hidden py-20 flex flex-col items-center">
+                <div class="loading-ring"></div>
+                <h3 class="mt-8 font-bold text-xl red-accent">Synthesizing Results...</h3>
+            </div>
+
+            <div id="generator-result" class="hidden">
+                <div class="section-header mb-8">
+                    <h2 class="section-title">Production Package</h2>
+                    <button id="copy-all" class="glass-btn px-6 py-2 font-bold text-sm">Copy All</button>
+                </div>
+                <div id="sections-container" class="space-y-8">
+                    <!-- Dynamic Sections -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Automation View -->
+        <div id="view-automation" class="hidden space-y-12 animate-pop-in">
+            <div class="nm-flat p-10 flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="flex items-center gap-6">
+                    <div id="yt-status-icon" class="logo-hub nm-inset !m-0" style="width: 70px; height: 70px;">
+                        <i data-lucide="youtube"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-800">YouTube Channel</h3>
+                        <p id="yt-status-text" style="color: var(--text-secondary)">Authorization Required</p>
+                    </div>
+                </div>
+                <button id="connect-youtube" class="nm-button-red px-8 py-4 font-bold flex items-center gap-3">
+                    <i data-lucide="link"></i> Connect Channel
+                </button>
+            </div>
+
+            <div class="nm-flat p-10">
+                <h3 class="text-xl font-800 mb-8 flex items-center gap-4">
+                    <i data-lucide="calendar" class="red-accent"></i> New Automation Schedule
+                </h3>
+                <form id="automation-form" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="md:col-span-2 nm-inset">
+                        <input type="text" id="automation-niche" placeholder="Niche (e.g., Tech Reviews, Stoicism)">
+                    </div>
+                    <div class="nm-inset">
+                        <select id="automation-frequency">
+                            <option value="1">1 Video / day</option>
+                            <option value="2">2 Videos / day</option>
+                        </select>
+                    </div>
+                    <div class="nm-inset">
+                        <select id="automation-duration">
+                            <option value="7">7 Days Protocol</option>
+                            <option value="30">30 Days Protocol</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-2">
+                        <button id="automation-submit" class="nm-button-red w-full py-5 font-800 text-lg disabled:opacity-50" disabled>
+                            INITIALIZE AUTOMATION
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <footer class="mt-20 py-10 text-center" style="border-top: 1px solid var(--nm-dark)">
+            <p style="color: var(--text-secondary); font-weight: 600;">© 2026 DG Automate AI | Crimson Intelligence Operations</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        // --- High-Fidelity Theme Logic ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') body.classList.add('dark-mode');
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+            lucide.createIcons();
+        });
+
+        lucide.createIcons();
+
+        // --- Controller Hub ---
+        const tabGen = document.getElementById('tab-generator');
+        const tabAuto = document.getElementById('tab-automation');
+        const viewGen = document.getElementById('view-generator');
+        const viewAuto = document.getElementById('view-automation');
+
+        function switchTab(target) {
+            if(target === 'gen') {
+                tabGen.classList.add('active');
+                tabAuto.classList.remove('active');
+                viewGen.classList.remove('hidden');
+                viewAuto.classList.add('hidden');
+            } else {
+                tabAuto.classList.add('active');
+                tabGen.classList.remove('active');
+                viewAuto.classList.remove('hidden');
+                viewGen.classList.add('hidden');
+            }
+        }
+
+        tabGen.addEventListener('click', () => switchTab('gen'));
+        tabAuto.addEventListener('click', () => switchTab('auto'));
+
+        // --- Generator Logic ---
+        const genFormBtn = document.getElementById('generator-submit');
+        const genInput = document.getElementById('generator-input');
+        const genLoading = document.getElementById('generator-loading');
+        const genResult = document.getElementById('generator-result');
+        const sectionsContainer = document.getElementById('sections-container');
+
+        genFormBtn.addEventListener('click', async () => {
+            const input = genInput.value.trim();
+            if(!input) return;
+
+            genLoading.classList.remove('hidden');
+            genResult.classList.add('hidden');
+            
+            // Simulating API Hub Response
+            setTimeout(() => {
+                const mockOutput = "STEP 1: Market Analysis\nAnalyzing deep YouTube trends for " + input + "...\n\nSTEP 2: Script Synthesis\nGenerating authoritative content flow...\n\nSTEP 3: SEO Dominance\nKeywords: " + input + ", DG Automate, YouTube AI.";
+                renderSections(mockOutput);
+                genLoading.classList.add('hidden');
+                genResult.classList.remove('hidden');
+            }, 2000);
+        });
+
+        function renderSections(text) {
+            sectionsContainer.innerHTML = '';
+            const stepRegex = /STEP (\d+):\s*([^\n]+)/g;
+            const matches = Array.from(text.matchAll(stepRegex));
+            
+            if (matches.length === 0) {
+                sectionsContainer.innerHTML = createSectionHTML('AI Analysis', text, 'file-text');
+            } else {
+                for (let i = 0; i < matches.length; i++) {
+                    const match = matches[i];
+                    const next = matches[i + 1];
+                    const title = match[2].trim();
+                    const content = text.substring(match.index + match[0].length, next ? next.index : text.length).trim();
+                    sectionsContainer.innerHTML += createSectionHTML(`Module ${match[1]}: ${title}`, content, 'zap');
+                }
+            }
+            lucide.createIcons();
+        }
+
+        function createSectionHTML(title, content, icon) {
+            return `
+                <div class="result-card nm-flat animate-pop-in">
+                    <div class="section-title mb-6">
+                        <div class="section-icon nm-inset">
+                            <i data-lucide="${icon}"></i>
+                        </div>
+                        ${title}
+                    </div>
+                    <div class="prose">
+                        ${marked.parse(content)}
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- YouTube Auth Portal ---
+        const connectBtn = document.getElementById('connect-youtube');
+        connectBtn.addEventListener('click', () => {
+            connectBtn.innerHTML = '<i data-lucide="check"></i> Connected';
+            document.getElementById('yt-status-text').textContent = 'Live Connection Active';
+            document.getElementById('automation-submit').disabled = false;
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
