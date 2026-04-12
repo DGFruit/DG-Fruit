@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- AI Logic (Groq Integration) ---
-    const API_KEY = "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";
+    const API_KEY = "";
 
     async function getAIResponse(prompt, type) {
         // IMPORTANT: Hardcoded to "llama-3.3-70b-versatile" for Groq
