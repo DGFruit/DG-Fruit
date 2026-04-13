@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- AI Logic (Secure Backend Integration) ---
     // Change this to your Render URL after you deploy the backend!
-    const BACKEND_URL = "http://localhost:3000/ai"; 
+    const BACKEND_URL = "https://dg-backend-e2tu.onrender.com/"; 
 
     async function getAIResponse(prompt, type, history) {
         try {
